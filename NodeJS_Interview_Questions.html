@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Node.js Interview Guide (Top 75 Questions)</title>
+<style>
+  :root {
+    --primary: #8CC84B; /* Node.js Green */
+    --text-main: #333333;
+    --border: #eaecef;
+    --bg-light: #f0fdf4;
+    --code-bg: #282c34;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px 40px;
+    background-color: #fff;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.8em;
+    color: #43853d;
+    border-bottom: 4px solid var(--primary);
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+  }
+  .section-title {
+    font-size: 2.2em;
+    padding-bottom: 10px;
+    margin-top: 50px;
+    border-bottom: 2px solid var(--primary);
+    color: #2c3e50;
+  }
+  .question-container {
+    margin-bottom: 30px;
+    page-break-inside: avoid;
+  }
+  .question {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+  .answer {
+    padding-left: 15px;
+    border-left: 3px solid var(--border);
+  }
+  .tip {
+    background-color: var(--bg-light);
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 0.95em;
+    color: #43853d;
+    border-left: 4px solid var(--primary);
+    font-weight: 500;
+  }
+  code {
+    background-color: #f6f8fa;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #d73a49;
+    font-family: Consolas, monospace;
+    font-size: 0.9em;
+  }
+  pre {
+    background-color: var(--code-bg);
+    color: #abb2bf;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 10px;
+    text-align: left;
+  }
+  th {
+    background-color: #fafbfc;
+  }
+  @media print {
+    body { padding: 0; }
+    .question-container { page-break-inside: avoid; margin-bottom: 25px; }
+    h1 { font-size: 2.2em; margin-bottom: 20px; }
+    .section-title { page-break-before: always; }
+    .section-title:first-of-type { page-break-before: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Node.js Interview Guide (Top 75 Questions)</h1>
+
+<h2 class="section-title">PART 1 (Q1–25)</h2>
+
+<div class="question-container">
+  <div class="question">1. What is Node.js? Where can you use it?</div>
+  <div class="answer">
+    Node.js is a JavaScript runtime built on Chrome’s V8 engine that allows you to run JS outside the browser.
+    <br><br><b>Key Features:</b> Event-driven, Non-blocking I/O, Single-threaded with event loop.
+    <br><b>Use Cases:</b> REST APIs, Real-time apps (chat, live tracking), Streaming apps (video/audio), Microservices.
+    <div class="tip">👉 Interview Tip: Say “I/O heavy apps, not CPU heavy”</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">2. Node.js vs JavaScript</div>
+  <div class="answer">
+    <table>
+      <tr><th>Feature</th><th>JavaScript</th><th>Node.js</th></tr>
+      <tr><td>Type</td><td>Language</td><td>Runtime</td></tr>
+      <tr><td>Environment</td><td>Browser</td><td>Server</td></tr>
+      <tr><td>DOM Access</td><td>Has DOM</td><td>No DOM</td></tr>
+      <tr><td>Scope</td><td>Frontend</td><td>Backend</td></tr>
+    </table>
+    <div class="tip">👉 Node = JS + APIs (fs, http, etc.)</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">3. Why use Node.js?</div>
+  <div class="answer">
+    - Handles thousands of concurrent requests<br>
+    - Faster due to non-blocking architecture<br>
+    - Same language (JS) everywhere<br>
+    - Huge npm ecosystem<br><br>
+    <b>Best for:</b> Chat apps, APIs, Streaming.
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">4. How does Node.js work?</div>
+  <div class="answer">
+    Node works using: Call Stack, Event Loop, Callback Queue, libuv (thread pool).<br><br>
+    <b>Flow:</b> Request comes → Async task sent to libuv → Callback pushed to queue → Event loop executes.
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">5. Is Node.js single-threaded?</div>
+  <div class="answer">
+    Yes — main thread is single.<br>
+    But it uses the <b>libuv thread pool</b> for: File system, DNS, Crypto.
+    <div class="tip">👉 So effectively it is a hybrid model.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">6. How Node handles concurrency?</div>
+  <div class="answer">
+    Using: Event loop, Async operations, Thread pool.
+    <div class="tip">👉 No thread per request (unlike Java).</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">7. What kind of API functions are supported?</div>
+  <div class="answer">
+    - <b>Async</b> (preferred)<br>
+    - <b>Sync</b> (blocking)
+<pre><code>fs.readFile()      // async
+fs.readFileSync()  // blocking</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">8. What is a module in Node.js?</div>
+  <div class="answer">
+    A reusable block of code.<br>
+    <b>Types:</b> Core (<code>fs</code>, <code>http</code>), Local, Third-party (<code>npm</code>).
+<pre><code>// math.js
+exports.add = (a,b) => a+b;</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">9. What is npm?</div>
+  <div class="answer">
+    Node Package Manager: Install libraries, Manage dependencies, Run scripts.
+<pre><code>npm install express</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">10. Why Node over Java/PHP?</div>
+  <div class="answer">
+    - Non-blocking (better concurrency)<br>
+    - Faster for I/O apps<br>
+    - Lightweight
+    <div class="tip">❌ Not good for CPU-heavy tasks.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">11. What is middleware?</div>
+  <div class="answer">
+    Functions executed between request & response. <b>Uses:</b> Auth, Logging, Validation.
+<pre><code>app.use((req, res, next) => {
+  console.log("Middleware");
+  next();
+});</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">12. What is control flow in Node.js?</div>
+  <div class="answer">Execution order of async tasks. <b>Tools:</b> Callbacks, Promises, Async/await.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">13. What is Event Loop?</div>
+  <div class="answer">
+    Core mechanism that handles async operations and executes callbacks.
+    <div class="tip">👉 Runs continuously checking queue.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">14. Disadvantages of Node.js</div>
+  <div class="answer">- Not for CPU-heavy tasks<br>- Callback hell<br>- Single-thread limitation</div>
+</div>
+
+<div class="question-container">
+  <div class="question">15. What is REPL?</div>
+  <div class="answer">
+    Interactive shell: Read Eval Print Loop.
+<pre><code>node
+> 5+5
+10</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">16. Import & Export module</div>
+  <div class="answer">
+<pre><code>// export
+module.exports = fn;
+
+// import
+const fn = require('./file');</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">17. Node.js vs AJAX</div>
+  <div class="answer">
+    <table>
+      <tr><th>Feature</th><th>Node.js</th><th>AJAX</th></tr>
+      <tr><td>Layer</td><td>Backend</td><td>Frontend</td></tr>
+      <tr><td>Environment</td><td>Server-side</td><td>Client-side</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">18. Popular DB with Node.js</div>
+  <div class="answer">- <b>MongoDB</b> (most common, fits JSON structure)<br>- MySQL<br>- PostgreSQL</div>
+</div>
+
+<div class="question-container">
+  <div class="question">19. Common libraries</div>
+  <div class="answer">Express, Mongoose, Lodash, Axios.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">20. package.json</div>
+  <div class="answer">Project config file containing Dependencies, Scripts, Metadata.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">21. Popular framework</div>
+  <div class="answer"><div class="tip">👉 Express.js (most used)</div></div>
+</div>
+
+<div class="question-container">
+  <div class="question">22. What are Promises?</div>
+  <div class="answer">
+    Handle async operations cleanly.
+<pre><code>fetchData()
+  .then(res => console.log(res))
+  .catch(err => console.log(err));</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">23. Event-driven programming</div>
+  <div class="answer">
+    Execution based on events.
+<pre><code>emitter.on('event', () => {});</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">24. What is Buffer?</div>
+  <div class="answer">
+    Used to handle binary data.
+<pre><code>const buf = Buffer.from("Hello");</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">25. What are Streams?</div>
+  <div class="answer">Process data in chunks. <b>Types:</b> Readable, Writable, Duplex, Transform.</div>
+</div>
+
+
+<h2 class="section-title">PART 2 (Q26–50)</h2>
+
+<div class="question-container">
+  <div class="question">26. Explain crypto module in Node.js</div>
+  <div class="answer">
+    Used for Encryption, Hashing, Secure data handling.
+<pre><code>const crypto = require('crypto');
+const hash = crypto.createHash('sha256')
+  .update('password')
+  .digest('hex');
+console.log(hash);</code></pre>
+    <div class="tip">👉 Used in: Password hashing, JWT signing.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">27. What is callback hell?</div>
+  <div class="answer">
+    Nested callbacks → unreadable code.
+<pre><code>// Problem:
+fs.readFile('a.txt', () => {
+  fs.readFile('b.txt', () => {
+    fs.readFile('c.txt', () => {});
+  });
+});</code></pre>
+    <b>Solution:</b> Promises, <code>async/await</code>.
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">28. Timers module in Node.js</div>
+  <div class="answer">Functions: <code>setTimeout</code>, <code>setInterval</code>, <code>setImmediate</code>.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">29. setImmediate() vs process.nextTick()</div>
+  <div class="answer">
+    <table>
+      <tr><th><code>setImmediate</code></th><th><code>nextTick</code></th></tr>
+      <tr><td>Runs later</td><td>Runs immediately</td></tr>
+      <tr><td>After I/O</td><td>Before event loop</td></tr>
+    </table>
+    <div class="tip">👉 <code>nextTick</code> has higher priority.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">30. setTimeout() vs setImmediate()</div>
+  <div class="answer">
+    - <code>setTimeout(fn,0)</code> → next cycle<br>
+    - <code>setImmediate(fn)</code> → after I/O<br>
+    Order may vary depending on context.
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">31. What is fork in Node.js?</div>
+  <div class="answer">
+    Creates child process (Node specific).
+<pre><code>const { fork } = require('child_process');
+fork('child.js');</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">32. spawn() vs fork()</div>
+  <div class="answer">
+    <table>
+      <tr><th><code>spawn</code></th><th><code>fork</code></th></tr>
+      <tr><td>Runs any process</td><td>Only Node</td></tr>
+      <tr><td>No IPC by default</td><td>Has IPC</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">33. Passport module</div>
+  <div class="answer">Authentication middleware supporting JWT, OAuth, Local login.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">34. Avoid callback hell (3 ways)</div>
+  <div class="answer">1. Promises<br>2. Async/Await<br>3. Modular code</div>
+</div>
+
+<div class="question-container">
+  <div class="question">35. EventEmitter</div>
+  <div class="answer">
+    Handles events.
+<pre><code>const EventEmitter = require('events');
+const emitter = new EventEmitter();
+
+emitter.on('msg', () => console.log("Hello"));
+emitter.emit('msg');</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">36. URL module</div>
+  <div class="answer">
+    Parse URLs.
+<pre><code>const url = new URL('https://abc.com?a=1');
+console.log(url.searchParams.get('a'));</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">37. Install, update, delete dependency</div>
+  <div class="answer">
+<pre><code>npm install pkg
+npm update pkg
+npm uninstall pkg</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">38. React Portals (Node context)</div>
+  <div class="answer">
+    Used in frontend (React), not Node directly.
+    <div class="tip">👉 Render outside DOM hierarchy.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">39. What is piping?</div>
+  <div class="answer">
+    Stream chaining.
+<pre><code>readStream.pipe(writeStream);</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">40. File flags (read/write)</div>
+  <div class="answer">- <code>r</code> → read<br>- <code>w</code> → write<br>- <code>a</code> → append</div>
+</div>
+
+<div class="question-container">
+  <div class="question">41. Open file in Node.js</div>
+  <div class="answer">
+<pre><code>fs.open('file.txt', 'r', callback);</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">42. Reactor pattern</div>
+  <div class="answer">
+    Handles I/O events asynchronously.
+    <div class="tip">👉 Core idea behind Node event loop.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">43. Test pyramid</div>
+  <div class="answer">1. Unit tests (most)<br>2. Integration tests<br>3. E2E tests (least)</div>
+</div>
+
+<div class="question-container">
+  <div class="question">44. body-parser</div>
+  <div class="answer">
+    Parses request body.
+<pre><code>app.use(express.json());</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">45. CORS</div>
+  <div class="answer">Cross-Origin Resource Sharing. Allows frontend to call backend from different domain.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">46. TLS module</div>
+  <div class="answer">Secure communication (HTTPS).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">47. What is cluster?</div>
+  <div class="answer">
+    Runs Node on multiple CPU cores.
+<pre><code>const cluster = require('cluster');</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">48. Manage sessions</div>
+  <div class="answer">- Cookies<br>- express-session<br>- Redis</div>
+</div>
+
+<div class="question-container">
+  <div class="question">49. Types of streams</div>
+  <div class="answer">Readable, Writable, Duplex, Transform.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">50. Authentication & Authorization</div>
+  <div class="answer">
+    - <b>Authentication:</b> Who you are (login).<br>
+    - <b>Authorization:</b> What you can access.<br>
+    *(Example: JWT, OAuth)*
+  </div>
+</div>
+
+
+<h2 class="section-title">PART 3 (Q51–75)</h2>
+
+<div class="question-container">
+  <div class="question">51. Packages for file uploading</div>
+  <div class="answer">
+    Common packages: <code>multer</code> (most used), <code>formidable</code>, <code>busboy</code>.
+<pre><code>// Example (Multer):
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
+app.post('/upload', upload.single('file'), (req, res) => {
+  res.send("File uploaded");
+});</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">52. Handle DB connections</div>
+  <div class="answer">
+    Use Connection pooling, ORM/ODM (Mongoose, Sequelize).
+<pre><code>mongoose.connect(DB_URL, { useNewUrlParser: true });</code></pre>
+    <div class="tip">👉 Avoid opening connection per request.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">53. Read command line arguments</div>
+  <div class="answer">
+<pre><code>console.log(process.argv);
+// node app.js hello
+// Output: ['node','app.js','hello']</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">54. Child processes</div>
+  <div class="answer">
+    Run parallel tasks using: <code>spawn</code>, <code>fork</code>, <code>exec</code>.
+    <div class="tip">👉 Used for CPU-heavy work.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">55. NODE_ENV</div>
+  <div class="answer">
+    Environment variable: <code>development</code>, <code>production</code>, <code>test</code>.
+<pre><code>if (process.env.NODE_ENV === 'production') { }</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">56. Timing features</div>
+  <div class="answer">- <code>setTimeout</code><br>- <code>setInterval</code><br>- <code>setImmediate</code><br>- <code>process.nextTick</code></div>
+</div>
+
+<div class="question-container">
+  <div class="question">57. What is WASI?</div>
+  <div class="answer">
+    WebAssembly System Interface.
+    <div class="tip">👉 Allows running WebAssembly outside browser (Node support).</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">58. First-class function</div>
+  <div class="answer">
+    Functions treated as values: Pass as argument, Return from function.
+<pre><code>function greet(fn) {
+  fn();
+}</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">59. Node vs other frameworks</div>
+  <div class="answer"><b>Node advantages:</b> Fast I/O, Lightweight, Event-driven.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">60. What is stub?</div>
+  <div class="answer">
+    Fake function used in testing.
+    <div class="tip">👉 Replaces real implementation.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">61. What is libuv?</div>
+  <div class="answer">Core library behind Node.js. Handles Event loop, Thread pool, Async I/O.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">62. Enhance performance using clustering</div>
+  <div class="answer">
+    Use multiple CPU cores:
+<pre><code>cluster.fork();</code></pre>
+    <div class="tip">👉 Improves scalability.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">63. When NOT to use Node.js</div>
+  <div class="answer">Avoid when: CPU-heavy tasks, Complex computations, ML processing.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">64. Debug Node.js</div>
+  <div class="answer">Tools: <code>node inspect</code>, Chrome DevTools, VS Code debugger.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">65. What is N-API?</div>
+  <div class="answer">
+    Allows building native addons (C/C++).
+    <div class="tip">👉 Stable API for Node extensions.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">66. Domain module</div>
+  <div class="answer">
+    Used for error handling (deprecated now).
+    <div class="tip">👉 Replaced by better patterns (try/catch, async handling).</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">67. Graceful shutdown</div>
+  <div class="answer">
+    Close server properly:
+<pre><code>process.on('SIGINT', () => {
+  server.close(() => {
+    console.log("Closed");
+  });
+});</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">68. dependencies vs devDependencies vs peerDependencies</div>
+  <div class="answer">
+    <table>
+      <tr><th>Type</th><th>Purpose</th></tr>
+      <tr><td><code>dependencies</code></td><td>Needed in production</td></tr>
+      <tr><td><code>devDependencies</code></td><td>Dev only (testing, build)</td></tr>
+      <tr><td><code>peerDependencies</code></td><td>Required by library user</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">69. Redis module</div>
+  <div class="answer">Used for: Caching, Sessions, Pub/Sub.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">70. What is WebSocket?</div>
+  <div class="answer">
+    Real-time communication (bi-directional).
+    <div class="tip">👉 Used in: Chat apps, Live updates.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">71. util module</div>
+  <div class="answer">Provides utility functions: <code>promisify</code>, <code>format</code>, <code>inspect</code>.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">72. Environment variables</div>
+  <div class="answer">Access using <code>process.env.KEY</code>. Use <code>.env</code> file (<code>dotenv</code>).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">73. DNS module</div>
+  <div class="answer">
+    Used for domain resolution:
+<pre><code>dns.lookup('google.com', callback);</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">74. Tracing in Node.js</div>
+  <div class="answer">
+    Used for Performance monitoring, Debugging.
+    <div class="tip">👉 Tools: OpenTelemetry, APM tools.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">75. Thread pool in Node.js</div>
+  <div class="answer">
+    Handled by libuv. Default size: 4 threads.
+    <br>Used for: File system, Crypto, DNS.
+    <div class="tip">👉 Can increase: <code>UV_THREADPOOL_SIZE=8</code></div>
+  </div>
+</div>
+
+<div style="text-align: center; margin-top: 50px; color: #7f8c8d; font-size: 0.9em;">
+  Generated by Antigravity | Best of luck with your interviews!
+</div>
+
+</body>
+</html>
