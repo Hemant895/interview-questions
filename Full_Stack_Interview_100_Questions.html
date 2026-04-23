@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top 100 Interview Questions: MongoDB, Express, OOPs, DSA</title>
+<style>
+  :root {
+    --primary: #4A90E2; 
+    --express: #333333;
+    --mongo: #4CAF50;
+    --oop: #E67E22;
+    --dsa: #9B59B6;
+    --text-main: #2c3e50;
+    --border: #ecf0f1;
+    --bg-light: #f8f9fa;
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--text-main);
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px 40px;
+    background-color: #fff;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.8em;
+    color: var(--primary);
+    border-bottom: 4px solid var(--primary);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 1.2em;
+    color: #7f8c8d;
+    margin-bottom: 50px;
+  }
+  .section-title {
+    font-size: 2.2em;
+    padding-bottom: 10px;
+    margin-top: 50px;
+    border-bottom: 2px solid;
+  }
+  .express-title { color: var(--express); border-color: var(--express); }
+  .mongo-title { color: var(--mongo); border-color: var(--mongo); }
+  .oop-title { color: var(--oop); border-color: var(--oop); }
+  .dsa-title { color: var(--dsa); border-color: var(--dsa); }
+
+  .question-container {
+    margin-bottom: 30px;
+    page-break-inside: avoid;
+  }
+  .question {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #34495e;
+  }
+  .answer {
+    padding-left: 15px;
+    border-left: 3px solid var(--border);
+  }
+  .tip {
+    background-color: var(--bg-light);
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 0.95em;
+    color: #555;
+    border-left: 4px solid var(--primary);
+  }
+  code {
+    background-color: #f1f2f6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #c0392b;
+    font-family: Consolas, monospace;
+    font-size: 0.9em;
+  }
+  pre {
+    background-color: #2f3640;
+    color: #f5f6fa;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+  }
+  @media print {
+    body { padding: 0; }
+    .question-container { page-break-inside: avoid; margin-bottom: 25px; }
+    h1 { font-size: 2.2em; }
+    .section-title { page-break-before: always; }
+    .section-title:first-of-type { page-break-before: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>The Ultimate 100 Interview Questions</h1>
+<div class="subtitle">Express.js | MongoDB | OOPs Concepts | Data Structures & Algorithms</div>
+
+<!-- EXPRESS.JS SECTION -->
+<h2 class="section-title express-title">Part 1: Express.js (Q1 - Q25)</h2>
+
+<div class="question-container">
+  <div class="question">1. What is Express.js?</div>
+  <div class="answer">Express.js is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. It is the standard server framework for Node.js.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">2. How is Express different from Node.js core http module?</div>
+  <div class="answer">The built-in <code>http</code> module requires writing a lot of boilerplate code to handle routing, requests, and responses. Express abstracts this away, providing a cleaner API for routing, middleware support, and JSON parsing.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">3. What is Middleware in Express?</div>
+  <div class="answer">Middleware functions are functions that have access to the request object (`req`), the response object (`res`), and the `next` middleware function in the application’s request-response cycle. They can execute code, modify requests/responses, and end the cycle.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">4. What is the role of `next()` in Express?</div>
+  <div class="answer">`next()` is a function that, when invoked, executes the next middleware in the stack. If not called, the request is left hanging unless a response is sent.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">5. How do you handle 404 errors in Express?</div>
+  <div class="answer">
+<pre><code>app.use((req, res, next) => {
+  res.status(404).send('Sorry, page not found!');
+});</code></pre>
+  <div class="tip">👉 Place this at the very end of all your routes.</div>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">6. Difference between `app.use()` and `app.get()`?</div>
+  <div class="answer">`app.use()` binds middleware to your application and runs for ALL HTTP methods (GET, POST, etc.) matching the path. `app.get()` only runs for HTTP GET requests on the exact specified route.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">7. What is `express.json()` used for?</div>
+  <div class="answer">It is a built-in middleware function that parses incoming requests with JSON payloads. Without it, `req.body` will be undefined.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">8. What is Express Router?</div>
+  <div class="answer">`express.Router` is a class to create modular, mountable route handlers. It acts as a "mini-application", keeping routes organized across multiple files.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">9. How to enable CORS in Express?</div>
+  <div class="answer">By using the `cors` npm package: <code>app.use(cors());</code>. This allows your API to be requested from different domains.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">10. Explain Error Handling Middleware in Express.</div>
+  <div class="answer">It has 4 arguments instead of 3: `(err, req, res, next)`. Express recognizes it as error-handling middleware.
+<pre><code>app.use((err, req, res, next) => {
+  res.status(500).send('Something broke!');
+});</code></pre>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">11. What is the difference between `req.params` and `req.query`?</div>
+  <div class="answer">
+    <ul>
+      <li><code>req.params</code>: Route parameters (e.g., <code>/users/:id</code>). Extract <code>id</code>.</li>
+      <li><code>req.query</code>: URL query strings (e.g., <code>/users?sort=asc</code>). Extract <code>sort</code>.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">12. How do you securely store passwords in Express apps?</div>
+  <div class="answer">Using a hashing library like `bcrypt`. Never store plain text passwords. Always hash them before saving to the database.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">13. What is JWT and how is it used in Express?</div>
+  <div class="answer">JSON Web Token is used for stateless authentication. In Express, you generate a JWT on login, send it to the client, and the client sends it back in the `Authorization` header on subsequent requests.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">14. How to serve static files in Express?</div>
+  <div class="answer">Using the built-in middleware: <code>app.use(express.static('public'));</code>. This serves HTML, CSS, images, etc.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">15. What is a templating engine in Express?</div>
+  <div class="answer">Engines like Pug, EJS, or Handlebars allow you to inject dynamic data into HTML files before sending them to the client.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">16. What is `helmet` in Express?</div>
+  <div class="answer">Helmet is a middleware package that helps secure your Express apps by setting various HTTP headers to prevent attacks like XSS.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">17. How do you handle file uploads in Express?</div>
+  <div class="answer">By using a middleware like `multer`. It parses `multipart/form-data` and saves the uploaded files to disk or memory.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">18. What is the difference between `res.send()` and `res.json()`?</div>
+  <div class="answer">`res.send()` can send buffers, strings, objects, or arrays. `res.json()` explicitly formats the response as JSON and sets the appropriate headers.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">19. How do you redirect in Express?</div>
+  <div class="answer"><code>res.redirect('/new-path');</code></div>
+</div>
+
+<div class="question-container">
+  <div class="question">20. What is a reverse proxy and why use it with Express?</div>
+  <div class="answer">A server (like Nginx) that sits in front of your Node app. It handles SSL, caching, and load balancing, allowing Node to focus purely on application logic.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">21. What is rate limiting?</div>
+  <div class="answer">Restricting the number of requests a user can make in a given timeframe to prevent abuse/DDoS. Implemented using packages like `express-rate-limit`.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">22. How do you write a custom validation middleware?</div>
+  <div class="answer">Create a function that checks `req.body`, and if invalid, returns `res.status(400).json({error})`. Otherwise, calls `next()`.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">23. How do you manage environments (dev/prod) in Express?</div>
+  <div class="answer">By using the `NODE_ENV` environment variable and packages like `dotenv` to load environment-specific configurations.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">24. What are some performance optimizations for Express?</div>
+  <div class="answer">Use caching (Redis), gzip compression (`compression` package), avoid synchronous functions, and use clustering or PM2 to run multiple instances.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">25. What is the difference between monolithic and microservice architecture in Node/Express?</div>
+  <div class="answer">Monolith has all application logic in one codebase/server. Microservices break the application into multiple independent Express apps communicating over HTTP or message queues.</div>
+</div>
+
+
+<!-- MONGODB SECTION -->
+<h2 class="section-title mongo-title">Part 2: MongoDB (Q26 - Q50)</h2>
+
+<div class="question-container">
+  <div class="question">26. What is MongoDB?</div>
+  <div class="answer">MongoDB is a NoSQL, document-oriented database that stores data in flexible, JSON-like documents (BSON).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">27. What is the difference between SQL and NoSQL databases?</div>
+  <div class="answer">SQL is relational, structured via tables/rows, and uses rigid schemas. NoSQL is non-relational, uses dynamic schemas, and stores data in documents, key-value pairs, or graphs.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">28. What is a Document and a Collection in MongoDB?</div>
+  <div class="answer">A **Document** is a single record (like a row in SQL). A **Collection** is a group of documents (like a table in SQL).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">29. What is Mongoose?</div>
+  <div class="answer">Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js. It provides schema validation, models, and easy-to-use querying.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">30. What is BSON?</div>
+  <div class="answer">Binary JSON. It is the binary encoding format MongoDB uses to store documents. It supports more data types than standard JSON (e.g., Dates, ObjectIds).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">31. What is an ObjectId (`_id`)?</div>
+  <div class="answer">A 12-byte unique identifier automatically generated by MongoDB for every document to act as a primary key.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">32. How do you enforce a Schema in MongoDB?</div>
+  <div class="answer">MongoDB is schema-less by default, but you can enforce validation rules at the database level, or use Mongoose in Node.js to define strict Schemas in application code.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">33. What is an Index in MongoDB?</div>
+  <div class="answer">Indexes are special data structures that store a small portion of the collection's data in an easy-to-traverse form. They drastically improve query read performance but slow down writes.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">34. What is the Aggregation Pipeline?</div>
+  <div class="answer">A framework for data processing. Documents enter a multi-stage pipeline (e.g., `$match`, `$group`, `$sort`) that transforms them into aggregated results.</div>
+</div>
+
+<div class="question">35. `find()` vs `findOne()`?</div>
+<div class="answer">`find()` returns a cursor to multiple documents (an array in Mongoose). `findOne()` returns exactly one document that matches the query.</div>
+
+<div class="question-container">
+  <div class="question">36. What is the `$lookup` stage in Aggregation?</div>
+  <div class="answer">It performs a left outer join to an unsharded collection in the same database to filter in documents from the "joined" collection for processing. (MongoDB's version of a JOIN).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">37. How to do transactions in MongoDB?</div>
+  <div class="answer">Since version 4.0, MongoDB supports multi-document ACID transactions across replica sets. You start a session, start a transaction, perform operations, and then commit or abort.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">38. What is Replication?</div>
+  <div class="answer">The process of synchronizing data across multiple servers (Replica Sets) to provide redundancy, high availability, and failover.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">39. What is Sharding?</div>
+  <div class="answer">A method for distributing data across multiple machines. It is MongoDB's approach to horizontal scaling for very large datasets.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">40. What is the role of a primary and secondary node?</div>
+  <div class="answer">In a Replica Set, the Primary receives all write operations. Secondaries replicate the primary's oplog and apply operations to their data sets.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">41. What is an `upsert`?</div>
+  <div class="answer">An operation that creates a new document if no documents match the filter criteria, or updates the document if a match is found.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">42. How to back up a MongoDB database?</div>
+  <div class="answer">Using tools like `mongodump` for backups and `mongorestore` for restoration.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">43. What is a covered query?</div>
+  <div class="answer">A query where all the requested fields are part of an index. MongoDB can return the result using only the index, without looking at the actual documents, making it extremely fast.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">44. Explain `$set` vs `$push`.</div>
+  <div class="answer">`$set` updates the value of a specific field. `$push` appends a specified value to an array.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">45. What are capped collections?</div>
+  <div class="answer">Fixed-size collections that support high-throughput operations that insert and retrieve documents based on insertion order. Once full, older documents are overwritten.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">46. How do you delete a collection?</div>
+  <div class="answer">`db.collection.drop()`</div>
+</div>
+
+<div class="question-container">
+  <div class="question">47. What is GridFS?</div>
+  <div class="answer">A specification for storing and retrieving files that exceed the BSON-document size limit of 16 MB.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">48. What is population in Mongoose?</div>
+  <div class="answer">The process of automatically replacing specified paths in a document with documents from other collections (similar to JOINs but done at the application layer).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">49. Explain the `$match` aggregation stage.</div>
+  <div class="answer">Filters the document stream to allow only matching documents to pass unmodified into the next pipeline stage.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">50. Can MongoDB replace Redis for caching?</div>
+  <div class="answer">While MongoDB is fast, Redis is an in-memory database and is generally much faster for volatile caching. MongoDB is a persistent data store.</div>
+</div>
+
+
+<!-- OOPS SECTION -->
+<h2 class="section-title oop-title">Part 3: Object-Oriented Programming (Q51 - Q75)</h2>
+
+<div class="question-container">
+  <div class="question">51. What is Object-Oriented Programming (OOP)?</div>
+  <div class="answer">OOP is a programming paradigm based on the concept of "objects", which contain data (attributes) and code (methods). It aims to bind data and behaviors together.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">52. What are the four main pillars of OOP?</div>
+  <div class="answer">
+    1. Encapsulation<br>
+    2. Abstraction<br>
+    3. Inheritance<br>
+    4. Polymorphism
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">53. What is a Class vs an Object?</div>
+  <div class="answer">A **Class** is a blueprint or template. An **Object** is an instance of a class containing actual values.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">54. Explain Encapsulation.</div>
+  <div class="answer">The bundling of data and methods that operate on that data within a single unit (class), and restricting direct access to some of the object's components (using access modifiers like private/protected).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">55. Explain Abstraction.</div>
+  <div class="answer">Hiding complex implementation details and showing only the essential features of the object to the user. (e.g., You know how to use a steering wheel without knowing how the engine works).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">56. Explain Inheritance.</div>
+  <div class="answer">A mechanism where a new class (child) derives properties and behaviors from an existing class (parent). It promotes code reusability.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">57. Explain Polymorphism.</div>
+  <div class="answer">The ability of different objects to respond to the same method call in their own specific way. "One interface, many methods."</div>
+</div>
+
+<div class="question-container">
+  <div class="question">58. What is Method Overloading?</div>
+  <div class="answer">Having multiple methods in the same class with the same name but different parameters (compile-time polymorphism). Note: JavaScript doesn't natively support this.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">59. What is Method Overriding?</div>
+  <div class="answer">When a child class provides a specific implementation for a method that is already defined in its parent class (run-time polymorphism).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">60. What is a Constructor?</div>
+  <div class="answer">A special method used to initialize objects when they are created.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">61. What is the `this` keyword?</div>
+  <div class="answer">It refers to the current instance of the class. In JS, its value depends on how the function is called.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">62. What is an Abstract Class?</div>
+  <div class="answer">A class that cannot be instantiated on its own and requires subclasses to provide implementations for its abstract methods.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">63. What is an Interface?</div>
+  <div class="answer">A completely "abstract class" that contains only abstract methods. It is used to define a contract that implementing classes must follow.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">64. Abstract Class vs Interface?</div>
+  <div class="answer">An abstract class can have both implemented and abstract methods and allows state (variables). An interface has only method signatures (no state or implementation) and a class can implement multiple interfaces.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">65. What is Multiple Inheritance?</div>
+  <div class="answer">When a class inherits from more than one parent class. It can cause the "Diamond Problem" and is not supported in languages like Java or C# (they use interfaces instead).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">66. What are Access Modifiers?</div>
+  <div class="answer">Keywords that set the accessibility of classes, methods, and properties: Public, Private, Protected.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">67. What is a Static Method?</div>
+  <div class="answer">A method that belongs to the class itself rather than instances of the class. It can be called without creating an object.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">68. What is Composition over Inheritance?</div>
+  <div class="answer">A principle stating that classes should achieve polymorphic behavior and code reuse by containing instances of other classes (composition) rather than inheriting from a base class.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">69. What is a Singleton Pattern?</div>
+  <div class="answer">A design pattern that ensures a class has only one instance and provides a global point of access to it.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">70. What is a Factory Pattern?</div>
+  <div class="answer">A design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">71. What is the purpose of getters and setters?</div>
+  <div class="answer">They provide read/write access to private variables, allowing you to add validation logic during data manipulation (Encapsulation).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">72. Explain SOLID principles.</div>
+  <div class="answer">
+    S - Single Responsibility<br>
+    O - Open/Closed<br>
+    L - Liskov Substitution<br>
+    I - Interface Segregation<br>
+    D - Dependency Inversion
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">73. What is super()?</div>
+  <div class="answer">A keyword used in a child class constructor to call the constructor of its parent class.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">74. What is a Destructor?</div>
+  <div class="answer">A method called automatically when an object is destroyed to free up resources. (Languages with garbage collection like JS/Java handle this automatically).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">75. Is JavaScript an OOP language?</div>
+  <div class="answer">JavaScript is a multi-paradigm language that supports OOP. It uses Prototype-based inheritance under the hood, although modern JS provides `class` syntax as syntactic sugar.</div>
+</div>
+
+
+<!-- DSA SECTION -->
+<h2 class="section-title dsa-title">Part 4: Data Structures & Algorithms (Q76 - Q100)</h2>
+
+<div class="question-container">
+  <div class="question">76. What is Big O Notation?</div>
+  <div class="answer">It describes the performance or complexity of an algorithm. It specifies the worst-case scenario regarding time (speed) or space (memory) as the input grows.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">77. What is an Array?</div>
+  <div class="answer">A linear data structure consisting of a collection of elements stored at contiguous memory locations, allowing fast `O(1)` index access.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">78. What is a Linked List?</div>
+  <div class="answer">A linear structure where elements (nodes) are not stored contiguously. Each node contains data and a pointer to the next node.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">79. Array vs Linked List?</div>
+  <div class="answer">Arrays have fast reads `O(1)` but slow insertions/deletions `O(n)`. Linked Lists have slow reads `O(n)` but fast insertions/deletions `O(1)` if you have the node reference.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">80. What is a Stack?</div>
+  <div class="answer">A linear structure that follows LIFO (Last In First Out). Think of a stack of plates. Operations: push, pop.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">81. What is a Queue?</div>
+  <div class="answer">A linear structure that follows FIFO (First In First Out). Think of a line at a store. Operations: enqueue, dequeue.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">82. What is a Hash Table (Hash Map)?</div>
+  <div class="answer">A data structure that maps keys to values for highly efficient lookup. It uses a hash function to compute an index. Average lookup time is `O(1)`.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">83. What is a Collision in a Hash Table?</div>
+  <div class="answer">When the hash function maps two different keys to the same index. Handled via chaining (linked lists at the index) or open addressing.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">84. What is a Tree?</div>
+  <div class="answer">A hierarchical non-linear data structure consisting of nodes connected by edges, starting from a root node.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">85. What is a Binary Search Tree (BST)?</div>
+  <div class="answer">A tree where each node has at most two children. The left child's value is always less than the parent, and the right child's value is greater. Search time is `O(log n)`.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">86. Tree Traversals (In-order, Pre-order, Post-order)?</div>
+  <div class="answer">
+    - In-order: Left, Root, Right (Gives sorted order in BST)<br>
+    - Pre-order: Root, Left, Right<br>
+    - Post-order: Left, Right, Root
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">87. What is a Graph?</div>
+  <div class="answer">A non-linear structure consisting of vertices (nodes) and edges (lines connecting them). Can be directed or undirected.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">88. BFS vs DFS in Graphs?</div>
+  <div class="answer">
+    - Breadth-First Search (BFS): Explores neighbor nodes level by level. Uses a Queue.<br>
+    - Depth-First Search (DFS): Explores as far as possible along a branch before backtracking. Uses a Stack.
+  </div>
+</div>
+
+<div class="question-container">
+  <div class="question">89. What is Bubble Sort?</div>
+  <div class="answer">A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. Time: `O(n^2)`.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">90. What is Merge Sort?</div>
+  <div class="answer">A divide-and-conquer algorithm that recursively divides the array into halves until they have one element, then merges them back in sorted order. Time: `O(n log n)`.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">91. What is Quick Sort?</div>
+  <div class="answer">A divide-and-conquer algorithm that picks a 'pivot' element and partitions the array so elements smaller than the pivot come before it, and larger come after. Average Time: `O(n log n)`.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">92. What is Binary Search?</div>
+  <div class="answer">A highly efficient search algorithm that finds an item in a **sorted** array by repeatedly dividing the search interval in half. Time: `O(log n)`.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">93. What is Dynamic Programming (DP)?</div>
+  <div class="answer">An optimization technique that solves complex problems by breaking them down into simpler overlapping subproblems and storing their results (memoization) to avoid redundant computations.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">94. Memoization vs Tabulation in DP?</div>
+  <div class="answer">Memoization is top-down (recursive with caching). Tabulation is bottom-up (iterative building of a table).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">95. What is a Greedy Algorithm?</div>
+  <div class="answer">An algorithmic paradigm that builds up a solution piece by piece, always choosing the next piece that offers the most immediate benefit (local optimum).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">96. What is a Heap?</div>
+  <div class="answer">A specialized tree-based data structure that satisfies the heap property. Max-Heap: Parent is greater than children. Min-Heap: Parent is smaller than children. Often used for Priority Queues.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">97. What is a Trie?</div>
+  <div class="answer">A tree-like data structure used to efficiently store and retrieve keys in a dataset of strings. Great for autocomplete features.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">98. How do you find a loop in a Linked List?</div>
+  <div class="answer">Using Floyd’s Cycle-Finding Algorithm (Tortoise and Hare). Use two pointers moving at different speeds. If they meet, there is a loop.</div>
+</div>
+
+<div class="question-container">
+  <div class="question">99. Time complexity of inserting in a Hash Table?</div>
+  <div class="answer">Average case: `O(1)`. Worst case: `O(n)` (if many collisions occur and they are chained in a single list).</div>
+</div>
+
+<div class="question-container">
+  <div class="question">100. What is Space Complexity?</div>
+  <div class="answer">The amount of memory an algorithm requires to run to completion, relative to the size of the input. Evaluated using Big O notation.</div>
+</div>
+
+<div style="text-align: center; margin-top: 50px; color: #7f8c8d; font-size: 0.9em;">
+  Generated by Antigravity | Best of luck with your interviews!
+</div>
+
+</body>
+</html>
